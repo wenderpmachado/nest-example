@@ -21,4 +21,10 @@ export class User {
     @Column()
     @IsBoolean()
     enabled: boolean;
+
+    constructor(id?: number, name?: string, enabled?: boolean) {
+        this.id = id;
+        this.name = name;
+        this.enabled = enabled;
+    }
 }
