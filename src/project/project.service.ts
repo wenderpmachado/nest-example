@@ -2,6 +2,8 @@ import { Component, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Project } from './project.schema';
 import { ProjectRepository } from './project.repository';
+import { MongoRepository } from 'typeorm';
+const ObjectID = require('mongodb').ObjectId;
 
 @Component()
 export class ProjectService {

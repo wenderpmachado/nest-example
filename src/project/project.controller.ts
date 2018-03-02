@@ -18,8 +18,8 @@ export class ProjectController {
     }
 
     @Get(':id')
-    findById(@Param('id') id: ObjectID): Promise<Project> {
-        return this.projectService.findById(Number.parseInt(id.toString()));
+    findById(@Param('id') id: number): Promise<Project> {
+        return this.projectService.findById(id);
     }
 
     @Post()
@@ -47,14 +47,14 @@ export class ProjectController {
     @Delete(':id')
     @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'The record has been successfully deleted.' })
     @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'No project with the informed ID to be excluded' })
-    delete(@Param('id') id: ObjectID): Promise<boolean> {
+    delete(@Param('id') id: number): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             try {
-                this.projectService.findById(Number.parseInt(id.toString())).then((project: Project) => {
+                this.projectService.findById(id).then((project: Project) => {
                     if (!project) {
                         throw new HttpException('No project with the informed ID to be excluded', HttpStatus.BAD_REQUEST);
                     } else {
-                        resolve(this.projectService.delete(Number.parseInt(id.toString())));
+                        resolve(this.projectService.delete(id));
                     }
                 }).catch(error => reject(error));
             } catch (error) { reject(error); }
